@@ -25,7 +25,7 @@ Docker is a containerization platform that packages applications and their depen
 •	Fast Startup: Containers launch in seconds.\
 •	Portability: Runs consistently across environments.\
 •	Efficiency: Uses fewer system resources.\
-•	Ideal For: Microservices, CI/CD pipelines, cloud-native apps.\
+•	Ideal For: Microservices, CI/CD pipelines, cloud-native apps.
 
 
 ## Virtual Machines (VMs)
@@ -36,11 +36,11 @@ VMs emulate entire operating systems using a hypervisor. Each VM includes its ow
 •	Slower Startup: Boot times are longer due to OS overhead.\
 •	Resource Intensive: Requires more CPU, RAM, and storage.\
 •	Flexibility: Can run different OS types on the same host.\
-•	Ideal For: Legacy applications, multi-OS environments, full system emulation.\
+•	Ideal For: Legacy applications, multi-OS environments, full system emulation.
 
 ### Prerequisites
 
-Before installation, consider the following:\
+Before installation, consider the following:
 
 - Firewall Compatibility: When you expose container ports using Docker,
 these ports may bypass firewall rules configured with ufw or firewalld.##
@@ -66,5 +66,43 @@ sudo sh ./get-docker.sh --dry-run
 docker --version
 docker run hello-world
 
+```
 
+When you run docker run it will download an image file and run a container.
+---
+### So what is image and container in docker?
+### Docker Image: 
+A Docker image is a read-only blueprint for a container. It contains everything needed to run an application.
+
+### Docker Container: 
+A Docker container is a running instance of a Docker image. It’s a lightweight, isolated environment where your application executes.
+
+--- 
+If we run the
+
+```bash
+docker run nginx
+```
+It will run the container and lock the terminal. If we exit from the terminal it will be stop. 
+
+
+ To solve the issue we need to run the image in detach mode. The command will be
+
+ ```bash
+docker run -d  nginx
+```
+
+In this command the container will run in detach mode. 
+
+
+But if the server is down or reboot the container will not run automatically. We need to run the container again manually. In production there will be run many containers, manually run containers will be difficult. To resolve the issue we can run this command.
+
+ ```bash
+docker run -d  --name=nginx-1 --restart=always nginx
+```
+
+Now our nginx is running, but it will be reachable because of port issue. We need to port mapping with our server port and container port. To fix the issue we need to run the below command. 
+
+ ```bash
+docker run -d  --name=nginx-1 -p 80:80 --restart=always nginx
 ```

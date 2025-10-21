@@ -106,3 +106,10 @@ Now our nginx is running, but it will be reachable because of port issue. We nee
  ```bash
 docker run -d  --name=nginx-1 -p 80:80 --restart=always nginx
 ```
+
+To make a container in image for shiping we can use below command
+
+
+ ```bash
+docker save nginx:v1 | gzip > nginx.tar.gz
+```

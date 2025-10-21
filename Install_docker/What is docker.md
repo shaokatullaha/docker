@@ -113,3 +113,7 @@ To make a container in image for shiping we can use below command
  ```bash
 docker save nginx:v1 | gzip > nginx.tar.gz
 ```
+For import this image to other docker engine we can use below command 
+ ```bash
+docker load -i nginx.tar.gz
+```
